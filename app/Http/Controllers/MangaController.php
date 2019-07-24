@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Manga;
 use App\Tag;
 use App\Category;
+use App\Volume;
 use App\Http\Requests\Manga\MangaRequest;
 
 class MangaController extends Controller
@@ -79,9 +80,13 @@ class MangaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Manga $manga)
     {
-        //
+        $singular = $manga->title;
+
+        $volumes = Volume::where('manga_id', $manga->id)->paginate(6);
+
+        return view('manga.index')->with('manga', $manga)->with('singular', $singular)->with('volumes', $volumes);
     }
 
     /**

@@ -21,6 +21,7 @@ class CreateVolumesTable extends Migration
             $table->string('image')->nullable();
             $table->integer('price')->nullable();
             $table->integer('discount')->nullable();
+            $table->integer('stock')->nullable();
             $table->timestamps();
         });
     }

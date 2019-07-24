@@ -11,6 +11,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Volume Title</th>
                             <th scope="col">Manga</th>
+                            <th scope="col">Stock</th>
                             <th scope="col"> </th>
                         </tr>
                     </thead>
@@ -20,6 +21,7 @@
                                 <th scope="row"> {{$volume->id}} </th>
                                 <td> {{$volume->volume}} </td>
                                 <td> {{$volume->manga->title}} </td>
+                                <td> {{isset($volume->stock) ? $volume->stock : '0'}} </td>
                                 <td>
                                     <div class="float-right">
                                         <a href=" {{route('volume.edit', $volume->id)}} " class="btn btn-primary btn-sm"> More Details </a> 

@@ -90,7 +90,26 @@
                                         </span>
                                     @enderror
                                 </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="stock" class="col-md-4 col-form-label text-md-right">{{ __('Volume Stock') }}</label>
+                            <div class="col-md-7">
+                                    <div class="input-group">
+                                            <span class="input-group-addon p-2">#</span>
+                                            <input type="number" name="stock" id="stock"
+                                                value="" min="1" step="1" 
+                                                data-number-to-fixed="2" data-number-stepfactor="100" 
+                                                class="form-control currency" placeholder=" Volume Stock"/>
+                                    </div>
+
+                                @error('stock')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                        </div>
 
                         <div class="form-group row files">
                             <label class="col-md-4 col-form-label text-md-right">Upload Volume Cover</label>
@@ -128,7 +147,11 @@
 
 @section('scripts')
 <script>
-    // Multi-Step Form
+    /*
+        Found the multi-step form at codepen when looking on how to do it,  
+        not to waste time i just copied it over. 
+    */
+    // Multi-Step Form 
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the crurrent tab
 
@@ -184,10 +207,10 @@
         for (i = 0; i < y.length; i++) {
             // If a field is empty...
             if (y[i].value == "") {
-            // add an "invalid" class to the field:
-            y[i].className += " invalid";
-            // and set the current valid status to false
-            valid = false;
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
             }
         }
         // If the valid status is true, mark the step as finished and valid:
@@ -205,14 +228,14 @@
         //... and adds the "active" class on the current step:
         x[n].className += " active";
     }
-    //@naresh action dynamic childs
+    //Dynamically add forms for multi insert of volumes
     var next = 0;
         $("#add-more").click(function(e){
             e.preventDefault();
             var addto = "#field" + next;
             var addRemove = "#field" + (next);
             next = next + 1;
-            var newIn = '<div id="field'+ next +'" name="field'+ next +'"> <br id="brk'+next+'"><hr id="linelol'+next+'"><div class="form-group row"> <label for="title" class="col-md-4 col-form-label text-md-right">Volume title/number</label> <div class="col-md-7"> <input id="title" type="text" placeholder="Volume title/number" class="form-control" name="title-'+next+'" value="" autofocus> </div> </div> <div class="form-group row"> <label for="price" class="col-md-4 col-form-label text-md-right">Volume Price</label> <div class="col-md-7"> <div class="input-group"> <span class="input-group-addon p-2">$</span> <input type="number" name="price-'+next+'" id="price" value="" min="5" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" placeholder=" Volume Price"/> </div> </div> </div> <div class="form-group row"> <label for="discount" class="col-md-4 col-form-label text-md-right">Volume Discount(optional)</label> <div class="col-md-7"> <div class="input-group"> <span class="input-group-addon p-2">%</span> <input type="number" name="discount-'+next+'" id="discount" value="" min="2" step="1" max="90" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" placeholder="Volume Discount(min=2%:max=90%)"/> </div> </div> </div> <div class="form-group row files"> <label class="col-md-4 col-form-label text-md-right">Upload Volume Cover</label> <div class="col-md-7"> <input type="file" class="form-control-file" name="image-'+next+'" id="image"> <span class="text-muted text-sm filename"></span> </div> </div> </div>';
+            var newIn = '<div id="field'+ next +'" name="field'+ next +'"> <br id="brk'+next+'"><hr id="linelol'+next+'"><div class="form-group row"> <label for="title" class="col-md-4 col-form-label text-md-right">Volume title/number</label> <div class="col-md-7"> <input id="title" type="text" placeholder="Volume title/number" class="form-control" name="title-'+next+'" value="" autofocus> </div> </div> <div class="form-group row"> <label for="price" class="col-md-4 col-form-label text-md-right">Volume Price</label> <div class="col-md-7"> <div class="input-group"> <span class="input-group-addon p-2">$</span> <input type="number" name="price-'+next+'" id="price" value="" min="5" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" placeholder=" Volume Price"/> </div> </div> </div> <div class="form-group row"> <label for="discount" class="col-md-4 col-form-label text-md-right">Volume Discount(optional)</label> <div class="col-md-7"> <div class="input-group"> <span class="input-group-addon p-2">%</span> <input type="number" name="discount-'+next+'" id="discount" value="" min="2" step="1" max="90" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" placeholder="Volume Discount(min=2%:max=90%)"/> </div> </div> </div><div class="form-group row"> <label for="stock" class="col-md-4 col-form-label text-md-right">{{ __('Volume Stock') }}</label> <div class="col-md-7"> <div class="input-group"> <span class="input-group-addon p-2">#</span> <input type="number" name="stock-'+next+'" id="stock" value="" min="1" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" placeholder=" Volume Stock"/> </div> </div> </div> <div class="form-group row files"> <label class="col-md-4 col-form-label text-md-right">Upload Volume Cover</label> <div class="col-md-7"> <input type="file" class="form-control-file" name="image-'+next+'" id="image"> <span class="text-muted text-sm filename"></span> </div> </div> </div>';
             var newInput = $(newIn);
             var removeBtn = '<div class="form-group row mb-0"><div class="col-md-8 offset-md-5"><button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >Remove</button></div></div></div></div><div id="field">';
             var removeButton = $(removeBtn);

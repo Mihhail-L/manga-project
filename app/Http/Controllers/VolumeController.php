@@ -15,6 +15,7 @@ class VolumeController extends Controller
      */
     public function index()
     {
+        //paginate volumes and send to index view
         $volumes = Volume::paginate(6)->onEachSide(1);
         return view('volumes.index')->with('volumes', $volumes);
     }
@@ -26,6 +27,7 @@ class VolumeController extends Controller
      */
     public function create()
     {
+        //Get all mangas and redirect to the create view
         $mangas = Manga::all();
         return view('volumes.create')->with('mangas', $mangas);
     }
@@ -38,21 +40,26 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
-        //substr("testers", -1); // returns "s"
+        /*
+            This piece needs validation which i will focus on later,
+            Right now i wanted to get the functionality working!
+        */
+        //get last key of request object to calculate how many volumes to insert
         $manga = $request->manga;
         $requestobject = $request->all();
         end($requestobject);
         $lastkey1 = key($requestobject);
         $lastkey = substr("$lastkey1", -1);
-
+        $volumes = array();
+        //create multidimensional array for each of the volumes with correct meta
         for($i = 0; $i <= $lastkey; $i++) {
             if($i == 0) {
-                $volumes = array();
                 $volumes[] = array(
                     'volume' => $request->input('title'),
                     'manga_id' => $manga,
                     'image' => $request->input('image'),
                     'price' => $request->input('price'),
+                    'stock' => $request->input('stock'),
                     'discount' => $request->input('discount'),
                 );
             } else {
@@ -61,13 +68,16 @@ class VolumeController extends Controller
                     'manga_id' => $manga,
                     'image' => $request->input('image-'.$i),
                     'price' => $request->input('price-'.$i),
+                    'stock' => $request->input('stock-'.$i),
                     'discount' => $request->input('discount-'.$i),
                 );
             }
         }
-        // $v = new Volume;
-        $v = Volume::insert($volumes);
-
+        //check if volumes is empty or not
+        if(!empty($volumes)) {
+            $v = Volume::insert($volumes);
+        }
+        //redirect back to volumes.index view with success flash message
         return redirect(route('volume.index'))->with('success', 'Successfully added '.$i.' Volume(s)');
     
 
