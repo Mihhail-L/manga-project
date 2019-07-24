@@ -1,0 +1,178 @@
+.login-dark form {
+    color:#fff;
+  }
+  
+  .login-dark .illustration {
+    text-align:center;
+    padding:15px 0 20px;
+    font-size:100px;
+    color:#2980ef;
+  }
+
+.login-dark .offset-md-5 {
+    margin-left: 43.666667% !important; 
+}
+  
+  .login-dark form .form-control {
+    background:none;
+    border:none;
+    border-bottom:1px solid #232327da;
+    border-radius:0;
+    box-shadow:none;
+    outline:none;
+    color:inherit;
+  }
+
+.form-dark form {
+    color:#fff;
+}
+
+.form-dark .offset-md-5 {
+    margin-left: 43.666667% !important; 
+}
+
+.form-dark form .form-control {
+    background:none;
+    border:none;
+    border-bottom:1px solid #232327da;
+    border-radius:0;
+    box-shadow:none;
+    outline:none;
+    color:inherit;
+  }
+
+.dark-paginate .pagination>li>a,
+.dark-paginate .pagination>li>span {
+  border: 1px solid #14131abd;
+}
+.dark-paginate.pagination>li.active>a {
+  background: purple;
+  color: #fff;
+}
+.dark-paginate .page-item.active .page-link {
+    background-color: #14131abd;
+    border-color: #14131abd;
+}
+.dark-paginate .page-item .page-link{
+    background-color: #14131abd;
+    border-color: #14131abd;
+}
+.dark-paginate .page-item:disabled {
+    background-color: #14131abd;
+    border-color: #14131abd;
+}
+
+.dark-trix .trix-button-row {
+  color: white !important;
+}
+
+.dark-trix trix-editor {
+  background-color: #17161ba8 !important;
+  color: white !important;
+}
+
+.files input {
+  outline: 2px dashed #92b0b3;
+  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  padding: 120px 0px 85px 43%;
+  text-align: center !important;
+  margin: 0;
+  width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+}
+.files{ position:relative}
+.files:after {  pointer-events: none;
+  position: absolute;
+  top: 42px;
+  left: 30%;
+  width: 50px;
+  right: 50px;
+  height: 56px;
+  content: "";
+  background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+  display: block;
+  margin: 0 auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+  position: absolute;
+  bottom: 10px;
+  left: 12.7%;  
+  pointer-events: none;
+  width: 100%;
+  right: 0;
+  height: 57px;
+  content: " or drag it here. ";
+  display: block;
+  margin: 0 auto;
+  color: #2ea591;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+}
+input[type='file'] {
+  color: transparent;
+}
+
+.select2-search input { 
+  background:none;
+  border:none;
+  border-bottom:1px solid white;
+  border-radius:0;
+  box-shadow:none;
+  outline:none;
+  color:inherit; 
+}
+.select2-results { 
+  background: #14131abd;
+  color: #fff;
+}
+.select2 {
+  background:none !important;
+  border:none !important;
+  border-bottom: 1px solid #232327da !important;
+}
+.select2-container--default .select2-selection--multiple {
+  background:none !important;
+  border:none !important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background:none !important;
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border:none !important;
+}
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: rgb(104, 104, 104) !important;
+}
+/* Step marker: Place in the form. */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
