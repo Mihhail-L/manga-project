@@ -176,3 +176,83 @@ input[type='file'] {
 .tab {
   display: none;
 }
+.hero-container {
+  height: 70vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: -30px;
+}
+.hero-image {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://mangaman.test/storage/website-images/3459.jpg") no-repeat center center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  padding: 40px;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  text-shadow: 2px 2px #000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: white;
+  background-color: #232327da;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hero-text button:hover {
+  background-color: rgba(68, 66, 87, 0.74);
+  color: white;
+}
+
+.carousel-stuff .row {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 67.5em;
+  *zoom: 1;
+}
+
+.large-12 {
+  position: relative;
+  width: 100%;
+}
+.columns {
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em;
+  float: left;
+}
+
+.carousel-cell {
+  width: 20%;
+  height: 350px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+.carousel-cell img {
+  display: block;
+  object-fit: contain;
+}
+.inner-wrap {
+  background-color: rgb(82, 82, 82);
+  box-shadow: 1px 1px 6px 0 rgba(0,0,0,0.2);
+}
+.flickity-button:disabled {
+  display: none;
+}
