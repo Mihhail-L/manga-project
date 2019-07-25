@@ -97,7 +97,12 @@ class MangaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $manga = Manga::findOrFail($id);
+        $tags = Tag::all();
+        $categories = Category::all();
+        $bundle_price = $manga->volumes->sum('price');
+
+        return view('manga.edit')->with('manga', $manga)->with('tags', $tags)->with('categories', $categories)->with('bundleprice', $bundle_price);
     }
 
     /**

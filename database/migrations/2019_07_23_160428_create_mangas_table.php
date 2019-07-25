@@ -21,7 +21,7 @@ class CreateMangasTable extends Migration
             $table->string('image');
             $table->string('start_date');
             $table->string('end_date')->nullable();
-            $table->integer('bundle_price')->nullable();
+            $table->integer('bundle_price')->default(0);
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
         <div class="card bg-dark text-white">
             <div class="card-header">
                 <div class="row align-items-center">
-                    <div class="col-md-11"><h4>Create New Volume(s)</h4> </div>
+                    <div class="col-md-11" id="volume-manga"><h4>Create New Volume(s)</h4> </div>
                     <div class="col-md-1"><a href="/volume" class="btn btn-secondary btn-sm float-right">Back</a></div>
                 </div>
             </div>
@@ -154,7 +154,6 @@
     // Multi-Step Form 
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the crurrent tab
-
     function showTab(n) {
         // This function will display the specified tab of the form...
         var x = document.getElementsByClassName("tab");
@@ -256,6 +255,5 @@
                     $(linelol).remove();
                 });
         });
-
 </script>
 @endsection

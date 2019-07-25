@@ -54,6 +54,14 @@ class VolumeController extends Controller
         //create multidimensional array for each of the volumes with correct meta
         for($i = 0; $i <= $lastkey; $i++) {
             if($i == 0) {
+                //validate first volume entry
+                $this->validate($request, [
+                    'title' => ['required'],
+                    'manga' => ['required'],
+                    'price' => ['required', 'max:150'],
+                    'stock' => ['required', 'min:1'],
+                    'discount' => ['max:90']
+                ]);
                 $volumes[] = array(
                     'volume' => $request->input('title'),
                     'manga_id' => $manga,
@@ -63,6 +71,14 @@ class VolumeController extends Controller
                     'discount' => $request->input('discount'),
                 );
             } else {
+                //dynamically validate added fields
+                $this->validate($request, [
+                    'title-'.$i => ['required'],
+                    'manga-'.$i => ['required'],
+                    'price-'.$i => ['required', 'max:150'],
+                    'stock-'.$i => ['required', 'min:1'],
+                    'discount-'.$i => ['max:90']
+                ]);
                 $volumes[] = array(
                     'volume' => $request->input('title-'.$i),
                     'manga_id' => $manga,

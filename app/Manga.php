@@ -21,4 +21,12 @@ class Manga extends Model
     public function reviews() {
         return $this->hasMany(Review::class);
     }
+
+    public function hasTag($tagid) {
+        return in_array($tagid, $this->tags->pluck('id')->toArray());
+    }
+
+    public function hasCat($categoryid) {
+        return in_array($categoryid, $this->categories->pluck('id')->toArray());
+    }
 }
