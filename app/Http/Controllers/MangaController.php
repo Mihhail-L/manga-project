@@ -65,7 +65,7 @@ class MangaController extends Controller
             $manga->bundle_price = $request->bundle_price;
         }
         if(isset($request->image)) {
-            $manga->deleteImage();
+            // edit delete image.. $manga->deleteImage();
             $imagePath = request('image')->store('/manga_cover', 'public');
             $manga->image = $imagePath;
         }

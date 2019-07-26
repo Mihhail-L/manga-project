@@ -280,8 +280,8 @@ input[type=file] {
 
 .carousel-cell img {
   display: block;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .inner-wrap {
@@ -295,7 +295,8 @@ input[type=file] {
 }
 
 .carousel-cell-image {
-  height: 250px;
+  height: 264px;
+  width: 100%;
 }
 
 .inner-wrap .tx-div {

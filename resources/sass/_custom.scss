@@ -247,7 +247,7 @@ input[type='file'] {
 }
 .carousel-cell img {
   display: block;
-  object-fit: contain;
+  object-fit: fill;
 }
 .inner-wrap {
   background-color: #656771bd ;
@@ -258,7 +258,8 @@ input[type='file'] {
   display: none;
 }
 .carousel-cell-image {
-  height: 250px;
+  height: 264px;
+  width: 100%;
 }
 
 .inner-wrap .tx-div {

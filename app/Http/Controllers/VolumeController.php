@@ -62,10 +62,13 @@ class VolumeController extends Controller
                     'stock' => ['required', 'min:1'],
                     'discount' => ['max:90']
                 ]);
+                if(isset($request->image)) {
+                    $imagePath = request('image')->store('/manga_cover', 'public');
+                }
                 $volumes[] = array(
                     'volume' => $request->input('title'),
                     'manga_id' => $manga,
-                    'image' => $request->input('image'),
+                    'image' => $imagePath,
                     'price' => $request->input('price'),
                     'stock' => $request->input('stock'),
                     'discount' => $request->input('discount'),
@@ -74,15 +77,18 @@ class VolumeController extends Controller
                 //dynamically validate added fields
                 $this->validate($request, [
                     'title-'.$i => ['required'],
-                    'manga-'.$i => ['required'],
                     'price-'.$i => ['required', 'max:150'],
                     'stock-'.$i => ['required', 'min:1'],
                     'discount-'.$i => ['max:90']
                 ]);
+                $imagePath = request('image-'.$i)->store('/manga_cover', 'public');
+                if(isset($imagePath)) {
+                    $imagePath1 = $imagePath;
+                }
                 $volumes[] = array(
                     'volume' => $request->input('title-'.$i),
                     'manga_id' => $manga,
-                    'image' => $request->input('image-'.$i),
+                    'image' => isset($imagePath1) ? $imagePath1 : '',
                     'price' => $request->input('price-'.$i),
                     'stock' => $request->input('stock-'.$i),
                     'discount' => $request->input('discount-'.$i),
