@@ -64,7 +64,7 @@
             @foreach($categories as $category)
                 @if($counter < 8)
                 <div class="category-images w-25 mb-3">
-                        <a href="" class="text-reset">
+                        <a href=" {{route('mangashop.category', $category->id)}} " class="text-reset">
                             <img src="http://mangaman.test/storage/website-images/abstract_category_button.png">
                             <h5 class="category-text"> {{$category->name}} <div class="tx-div"></div></h5>
                         </a> 

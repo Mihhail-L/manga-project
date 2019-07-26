@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Volume;
 use App\Category;
 use App\Tag;
+use App\Manga;
 
 class MangaShopController extends Controller
 {
@@ -25,5 +26,20 @@ class MangaShopController extends Controller
         $manga = $volume->manga();
 
         return view('mangashop.show')->with('volume', $volume)->with('manga', $manga);
+    }
+
+    public function categoryFilter($id) {
+        $category = Category::findOrFail($id);
+        $categories = Category::all();
+        $filter = 'category';
+        $tags = Tag::all();
+        $mangas = $category->mangas()->where('category_id', $id)->paginate(12);
+
+        return view('mangashop.index')
+                ->with('mangas', $mangas)
+                ->with('categories', $categories)
+                ->with('tags', $tags)
+                ->with('filter', $filter);
+        
     }
 }
