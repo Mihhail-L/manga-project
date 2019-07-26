@@ -437,6 +437,43 @@ a.dropdown-item.reset-text.text-white {
   border-bottom: 0.25px solid rgba(0, 0, 0, 0.692);
 }
 
+.border-thing {
+  border-right: 0.5px solid #656771;
+  min-height: 860px;
+  line-height: 0 !important;
+}
+
+.categories-btn {
+  margin-top: 5px;
+  background-color: #41474dfb !important;
+  color: #fff;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 14px;
+  transition: 0.4s;
+  border-bottom: 0.5px solid #000 !important;
+  min-width: 150px;
+  max-width: 150px;
+  min-height: 37px;
+}
+
+ul.border-thing {
+  text-decoration: none;
+}
+
+li.categories-btn {
+  text-decoration: none;
+}
+
+.border-thing .btn-secondary {
+  min-width: 150px;
+}
+
+.border-thing .mt-1 {
+  margin-top: 0.35rem !important;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

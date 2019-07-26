@@ -21,6 +21,8 @@ View::composer('layouts.app', function($view) {
 
 Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
+Route::get('/mangashop', 'MangaShopController@index')->name('mangashop.index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
