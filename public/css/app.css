@@ -426,6 +426,16 @@ h3.section-title.title_center span:before {
   box-shadow: 0 50vh 0 50vh #1f2024;
 }
 
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #656771bd !important;
+  color: white !important;
+}
+
+a.dropdown-item.reset-text.text-white {
+  border-bottom: 0.25px solid rgba(0, 0, 0, 0.692);
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

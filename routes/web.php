@@ -10,6 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Category;
+use App\Tag;
+
+View::composer('layouts.app', function($view) {
+    $view
+    ->with('categories', Category::all())
+    ->with('tags', Tag::all());
+});
 
 Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
@@ -17,10 +25,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/manga', 'MangaController');
+//Only admins should be able to Create/Read/Update/Delete individual volumes/manga/tags/categories/uers etc..
+Route::middleware(['auth', 'admin'])->group(function() {
 
-Route::resource('/volume', 'VolumeController');
+    Route::resource('/manga', 'MangaController');
 
-Route::resource('/category', 'CategoryController');
+    Route::resource('/volume', 'VolumeController');
+    
+    Route::resource('/category', 'CategoryController');
+    
+    Route::resource('/tags', 'TagController');
 
-Route::resource('/tags', 'TagController');
+});

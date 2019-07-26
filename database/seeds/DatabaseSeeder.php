@@ -3,6 +3,7 @@
 use App\Category;
 use App\Tag;
 use Illuminate\Database\Seeder;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +18,17 @@ class DatabaseSeeder extends Seeder
 
         factory(Category::class, 10)->create();
         factory(Tag::class, 10)->create();
+
+        factory(User::class, 3)->create();
+        $user = User::where('email', 'levin.mihhail@gmail.com')->first();
+        if(!$user) {
+            User::create([
+                'role' => 'admin',
+                'name' => 'Mihhail Levin',
+                'username' => 'Miha',
+                'email' => 'levin.mihhail@gmail.com',
+                'password' => Hash::make('password'),
+            ]);
+        }
     }
 }

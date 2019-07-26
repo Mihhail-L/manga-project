@@ -8,6 +8,7 @@ use App\Tag;
 use App\Category;
 use App\Volume;
 use App\Http\Requests\Manga\MangaRequest;
+use Illuminate\Support\Facades\Storage;
 
 class MangaController extends Controller
 {
@@ -19,9 +20,13 @@ class MangaController extends Controller
     public function index()
     {
         $mangas = Manga::paginate(5)->onEachSide(1);
+        $categories = Category::all();
+        $tags = Tag::all();
 
         return view('manga.index')
-                ->with('mangas', $mangas); 
+                ->with('mangas', $mangas)
+                ->with('categories', $categories)
+                ->with('tags', $tags); 
     }
 
     /**
@@ -60,6 +65,7 @@ class MangaController extends Controller
             $manga->bundle_price = $request->bundle_price;
         }
         if(isset($request->image)) {
+            $manga->deleteImage();
             $imagePath = request('image')->store('/manga_cover', 'public');
             $manga->image = $imagePath;
         }
@@ -85,8 +91,15 @@ class MangaController extends Controller
         $singular = $manga->title;
 
         $volumes = Volume::where('manga_id', $manga->id)->paginate(6);
+        $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('manga.index')->with('manga', $manga)->with('singular', $singular)->with('volumes', $volumes);
+        return view('manga.index')
+                ->with('manga', $manga)
+                ->with('singular', $singular)
+                ->with('volumes', $volumes)
+                ->with('categories', $categories)
+                ->with('tags', $tags);
     }
 
     /**

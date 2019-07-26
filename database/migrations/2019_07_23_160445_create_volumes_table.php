@@ -22,6 +22,7 @@ class CreateVolumesTable extends Migration
             $table->integer('price')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('stock')->nullable();
+            $table->integer('total_sold')->nullable();
             $table->timestamps();
         });
     }

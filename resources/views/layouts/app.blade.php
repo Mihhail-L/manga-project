@@ -20,19 +20,49 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm text-uppercase">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand pr-4" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse pt-1" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mangashop">MangaShop</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                            </a>
+                            <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+                                @foreach ($categories as $category)
+                                    <a class="dropdown-item reset-text text-white" href="/mangashop/category/{{$category->id}}"> {{$category->name}} </a>
+                                @endforeach
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            MangaMan Info
+                            </a>
+                            <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item reset-text text-white" href="/404"> Announcements </a>
+                                <a class="dropdown-item reset-text text-white" href="/404"> Something Else </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sale
+                            </a>
+                            <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item reset-text text-white" href="/discounts"> All Time Discount </a>
+                                <a class="dropdown-item reset-text text-white" href="/thisweek"> This Week Specials </a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -54,6 +84,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(auth()->user()->isAdmin())
+                                    <a class="dropdown-item" href="/adminpanel">
+                                        {{ __('Admin Dashboard') }}
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
