@@ -31,7 +31,7 @@
                             @foreach($manga->volumes as $volume)
                                 <div class="carousel-cell">
                                     <div class="inner-wrap">
-                                        <a href="" class="text-reset"><img src="
+                                        <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
                                         {{isset($volume->image) ? 
                                         asset("storage/$volume->image") : 
                                         asset("storage/$manga->image")}}" 
@@ -39,7 +39,7 @@
                                         <div class="text-center">    
                                             <h5 class=" pt-2"> Manga </h5>
                                             <div class="tx-div"></div>
-                                            <a href="" class="text-reset"> <p> {{$manga->title}} {{$volume->volume}} </p>  </a>
+                                            <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"> <p> {{$manga->title}} {{$volume->volume}} </p>  </a>
                                             <span class="price"> 
                                                 @if(isset($volume->discount))
                                                     <del> <span>${{$volume->price}}</span> </del><br>
@@ -105,9 +105,6 @@
         </div>
     </div>
 </div>
-<footer class="manga-footer text-center text-white">
-    <p class="pt-4">&copy; MangaMan 2019</p>
-</footer>
 @endsection
 
 <!-- This is for later scripts and custom css imports -->

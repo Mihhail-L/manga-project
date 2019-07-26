@@ -250,7 +250,12 @@
             $(addRemove).after(removeButton);
             $("#field" + next).attr('data-source',$(addto).attr('data-source'));
             $("#count").val(next);  
-            
+            $(function() {
+                $("input:file").change(function (){
+                    var fileName = $(this).val();
+                    $(".filename-"+next).html(fileName);
+                });
+            });
             
                 $('.remove-me').click(function(e){
                     e.preventDefault();
@@ -258,10 +263,12 @@
                     var fieldID = "#field" + fieldNum;
                     var breakline = "#brk" + fieldNum;
                     var linelol = "#linelol" + fieldNum;
+                    var filename = ".filename-"+fieldnum;
                     $(this).remove();
                     $(fieldID).remove();
                     $(breakline).remove();
                     $(linelol).remove();
+                    $(filename).remove();
                 });
             
         });

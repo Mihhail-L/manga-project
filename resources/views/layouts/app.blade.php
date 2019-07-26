@@ -107,10 +107,14 @@
         </nav>
 
 
-        <main class="py-4">
-                        @include('inc.messages')
-                        @yield('content')
+        <main class="pt-4 pb-5">
+            <div class="col-10">
+                @include('inc.messages')
+            </div>
+            @yield('content')
+
         </main>
+        @include('inc.footer')
     </div>
 
     <!-- Scripts -->

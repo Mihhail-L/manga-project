@@ -23,11 +23,13 @@ Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
 Route::get('/mangashop', 'MangaShopController@index')->name('mangashop.index');
 
+Route::get('/mangashop/manga/{id}', 'MangaShopController@show')->name('mangashop.show');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Only admins should be able to Create/Read/Update/Delete individual volumes/manga/tags/categories/uers etc..
+//Only admins should be able to Create/Read/Update/Delete individual volumes/manga/tags/categories/users etc..
 Route::middleware(['auth', 'admin'])->group(function() {
 
     Route::resource('/manga', 'MangaController');

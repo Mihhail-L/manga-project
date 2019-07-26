@@ -10,7 +10,7 @@ use App\Tag;
 class MangaShopController extends Controller
 {
     public function index() {
-        $volumes = Volume::all();
+        $volumes = Volume::paginate(12);
         $categories = Category::all();
         $tags = Tag::all();
 
@@ -18,5 +18,12 @@ class MangaShopController extends Controller
                 ->with('volumes', $volumes)
                 ->with('categories', $categories)
                 ->with('tags', $tags);
+    }
+
+    public function show($id) {
+        $volume = Volume::findOrFail($id);
+        $manga = $volume->manga();
+
+        return view('mangashop.show')->with('volume', $volume)->with('manga', $manga);
     }
 }
