@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Manga extends Model
 {
@@ -28,5 +29,8 @@ class Manga extends Model
 
     public function hasCat($categoryid) {
         return in_array($categoryid, $this->categories->pluck('id')->toArray());
+    }
+    public function deleteImage() {
+        Storage::delete('/storage/'.$this->image);
     }
 }

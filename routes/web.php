@@ -25,6 +25,8 @@ Route::get('/mangashop', 'MangaShopController@index')->name('mangashop.index');
 
 Route::get('/mangashop/category/{id}', 'MangaShopController@categoryFilter')->name('mangashop.category');
 
+Route::get('/mangashop/discounts', 'MangaShopController@discountFilter')->name('mangashop.discounts');
+
 Route::get('/mangashop/manga/{id}', 'MangaShopController@show')->name('mangashop.show');
 
 Auth::routes();

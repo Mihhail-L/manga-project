@@ -20,9 +20,10 @@ class CreateVolumesTable extends Migration
             $table->string('volume');
             $table->string('image')->nullable();
             $table->integer('price')->nullable();
-            $table->integer('discount')->nullable();
-            $table->integer('stock')->nullable();
-            $table->integer('total_sold')->nullable();
+            $table->integer('discount')->default(0);
+            $table->integer('stock')->default(0);
+            $table->integer('total_sold')->default(0);
+            $table->boolean('featured')->default(false);
             $table->timestamps();
         });
     }

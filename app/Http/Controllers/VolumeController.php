@@ -124,7 +124,8 @@ class VolumeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $volume = Volume::findOrFail($id);
+        return view('volumes.edit')->with('volume', $volume);
     }
 
     /**
@@ -136,7 +137,21 @@ class VolumeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $volume = Volume::findOrFail($id);
+
+        $volume->volume = $request->title;
+        $volume->price = $request->price;
+        $volume->discount = $request->discount;
+        $volume->stock = $request->stock;
+        if(isset($request->image)) {
+            $volume->deleteImage();
+            $imagePath = request('image')->store('/manga_cover', 'public');
+            $volume->image = $imagePath;
+        }
+
+        $volume->save();
+        session()->flash('success', 'Successfully Updated Volume For "'.$volume->manga->title.'"');
+        return redirect()->back();
     }
 
     /**
@@ -147,6 +162,11 @@ class VolumeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $volume = Volume::findOrFail($id);
+        $volume_title = $volume->volume;
+        $volume_manga = $volume->manga->title;
+        $volume->deleteImage();
+        $volume->delete();
+        session()->flash('success', 'Successfully Deleted '.$volume_title.' That belonged to "'.$volume_manga.'"');
     }
 }

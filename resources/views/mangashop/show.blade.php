@@ -7,7 +7,12 @@
                 <img class="shop-item-image" src=" {{isset($volume->image) ? asset("/storage/$volume->image") : asset("/storage/$volume->manga->cover_image")}} " alt=" {{$volume->manga->title}}  {{$volume->volume}} ">
             </div>
             <div class="col-md-8">
-                <h2> {{$volume->manga->title}} {{$volume->volume}} </h2><button class="btn btn-success float-right">Place holder</button>
+                <h2> {{$volume->manga->title}} {{$volume->volume}} </h2>
+                @if($volume->stock == 0)
+                    <button class="btn float-right btn-secondary disabled">Place holder</button>
+                @else
+                    <button class="btn btn-success float-right">Place holder</button>
+                @endif
                 <h5> Manga Author: {{$volume->manga->author}} </h5>
                 <h5>Price: <span class="price" style="font-size:20px;"> 
                     @if($volume->discount > 0) 
@@ -16,7 +21,14 @@
                     @else 
                         ${{$volume->price}}
                     @endif
-                </span> </h5>
+                </span></h5>
+                    @if($volume->stock > 10)
+                        <h5>In Stock: <span style="color:green;">{{ $volume->stock }}</span></h5>
+                    @elseif($volume->stock == 0)
+                    <h4 class="text-danger">Out of Stock</h4>
+                    @else
+                        <h5>In Stock: <span style="color:red;">{{ $volume->stock }}</span></h5>
+                    @endif
                 <br>
                 <h4>Synopsis:</h4>
                 <hr>

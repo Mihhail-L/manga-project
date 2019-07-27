@@ -127,7 +127,40 @@ class MangaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $manga = Manga::findOrFail($id);
+
+        $manga_old = $manga->title;
+
+        $manga->title = $request->title;
+        $manga->author = $request->author;
+        $manga->description = $request->description;
+        $manga->start_date = $request->start_date;
+        if(isset($request->end_date)) {
+            $manga->end_date = $request->end_date;
+        }
+        if(isset($request->bundle_price)) {
+            $manga->bundle_price = $request->bundle_price;
+        }
+        if(isset($request->image)) {
+            $manga->deleteImage();
+            $imagePath = request('image')->store('/manga_cover', 'public');
+            $manga->image = $imagePath;
+        }
+        $manga->update();
+        if($request->tags) {
+            $manga->tags()->syncWithoutDetaching($request->tags);
+        }
+        if($request->categories) {
+            $manga->categories()->syncWithoutDetaching($request->categories);
+        }
+
+        if($manga_old == $request->title) {
+            session()->flash('success', 'Manga "'.$manga_old.'" Updated Successfully');
+        } else {
+            session()->flash('success', 'Manga "'.$manga_old.'" Updated to "'.$manga->title.'"');
+        } 
+
+        return redirect(route('manga.index'));
     }
 
     /**
@@ -138,6 +171,14 @@ class MangaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $manga = Manga::findOrFail($id);
+
+        $manga_title = $manga->title;
+        $volume_count = $manga->volumes->count() > 0 ? $manga->volumes->count() : 0;
+
+        $manga->delete();
+        session()->flash('success', 'Manga "'.$manga_title.'" and '.$volume_count.' volume(s) have been deleted');
+
+        return redirect(route('manga.index'));
     }
 }

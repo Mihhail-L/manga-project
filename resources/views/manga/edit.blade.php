@@ -7,13 +7,20 @@
         <div class="card bg-dark text-white">
             <div class="card-header">
                 <div class="row align-items-center">
-                    <div class="col-md-11"><h4>Update Manga: {{$manga->title}} </h4> </div>
-                    <div class="col-md-1"><a href=" {{route('manga.show', $manga->id)}} " class="btn btn-secondary btn-sm float-right">Back</a></div>
+                    <div class="col-md-8"><h4>Update Manga: {{$manga->title}} </h4> </div>
+                    <div class="col-md-4"><a href=" {{route('manga.show', $manga->id)}} " class="btn btn-secondary btn-sm float-right">Back</a>
+                        <form action=" {{route('manga.destroy', $manga->id)}} " method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm float-right mr-2" type="submit">Delete Manga</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-body form-dark">
                 <form action=" {{ route('manga.update', $manga->id)}} " method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-group row">
                         <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Manga Title') }}</label>
                         <div class="col-md-7">

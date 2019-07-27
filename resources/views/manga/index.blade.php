@@ -79,9 +79,9 @@
                                 <td scope="row"> {{$volume->id}} </td>
                                 <td>  {{$volume->volume}} </td>
                                 <td> ${{$volume->price}} </td>
-                                <td> {!! $volume->discount > 25 ? '<div class="text-danger">'.$volume->discount.'</div>' : $volume->discount!!}% </td>
+                                <td> {!! $volume->discount > 25 ? '<span class="text-danger">'.$volume->discount.'%</span>' : $volume->discount.'%'!!} </td>
                                 <td> ${{round((1 - $volume->discount/100) * $volume->price, 2)}} </td>
-                                <td> {!!$volume->stock < 10 ? '<div class="text-danger">'.$volume->stock.'</div>' : $volume->stock!!} </td>
+                                <td> {!!$volume->stock < 10 ? '<span class="text-danger">'.$volume->stock.'</span>' : $volume->stock!!} </td>
                                 <td> 
                                     <div class="float-right">
                                         <a href=" {{route('volume.edit', $volume->id)}} " class="btn btn-primary btn-sm">Edit Volume</a> 

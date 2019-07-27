@@ -33,10 +33,17 @@ class MangaShopController extends Controller
         $categories = Category::all();
         $filter = 'category';
         $tags = Tag::all();
-        $mangas = $category->mangas()->where('category_id', $id)->paginate(12);
+        $mangas = $category->mangas()->where('category_id', $id)->get();
+        $i= 0;
+        foreach($mangas as $manga) {
+            $manga_ids[] = $manga->id;
+        }
+        $volumes = $manga->volumes()->whereIn('manga_id', $manga_ids)->get();
+        dd($volumes);
+
 
         return view('mangashop.index')
-                ->with('mangas', $mangas)
+                ->with('volumes', $volumes)
                 ->with('categories', $categories)
                 ->with('tags', $tags)
                 ->with('filter', $filter);
