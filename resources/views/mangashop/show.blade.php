@@ -82,8 +82,42 @@
                                         @endif
                                 @endforeach
                             </div>
+            </div>
         </div>
     </div>
+    <!-- Place holder for reviews later -->
+    <div class="container text-white pt-5">
+            <h3 class="section-title title_center">
+                    <span class="p-5">{{$volume->manga->title}} Reviews</span>
+                </h3>
+                <div class="row">
+                    <div class="col">
+                        <blockquote  class="blockquote">
+                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
+                            <footer class="blockquote-footer">From WWF's website</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
+                            <footer class="blockquote-footer">From WWF's website</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <blockquote  class="blockquote">
+                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
+                            <footer class="blockquote-footer">From WWF's website</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col">
+                        <blockquote class="blockquote">
+                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
+                            <footer class="blockquote-footer">From WWF's website</footer>
+                        </blockquote>
+                    </div>
+                </div>
     </div>
 @endsection
 

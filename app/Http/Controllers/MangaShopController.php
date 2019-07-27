@@ -24,8 +24,12 @@ class MangaShopController extends Controller
     public function show($id) {
         $volume = Volume::findOrFail($id);
         $manga = $volume->manga();
+        $reviews = $volume->manga->reviews();
+        // $manga_id = $volume->manga->id;
+        // $mangass = Manga::find($manga_id);
+        // $reviews = $mangass->reviews();
 
-        return view('mangashop.show')->with('volume', $volume)->with('manga', $manga);
+        return view('mangashop.show')->with('volume', $volume)->with('manga', $manga)->with('reviews', $reviews);
     }
 
     public function categoryFilter($id) {
@@ -34,16 +38,10 @@ class MangaShopController extends Controller
         $filter = 'category';
         $tags = Tag::all();
         $mangas = $category->mangas()->where('category_id', $id)->get();
-        $i= 0;
-        foreach($mangas as $manga) {
-            $manga_ids[] = $manga->id;
-        }
-        $volumes = $manga->volumes()->whereIn('manga_id', $manga_ids)->get();
-        dd($volumes);
 
 
         return view('mangashop.index')
-                ->with('volumes', $volumes)
+                ->with('mangas', $mangas)
                 ->with('categories', $categories)
                 ->with('tags', $tags)
                 ->with('filter', $filter);

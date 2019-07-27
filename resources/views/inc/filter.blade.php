@@ -1,9 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
-   @if(isset($filter))
-    @include('inc.filter')
-   @else 
     <div class="container">
         <div class="row">
             <div class="col-md-2 border-thing text-left">
@@ -12,7 +7,7 @@
                 <ul class="collapse float-left list-group" id="categoriesToggler">
                     @foreach ($categories as $category)
                         @if($category->mangas->count() > 0)
-                            <a href="{{route('mangashop.category', $category->id)}}" class="reset-text text-white">
+                            <a href=" {{route('mangashop.category', $category->id)}} " class="reset-text text-white">
                                 <li class="categories-btn w-100 list-group-item ">
                                     <div class="mt-1">{{$category->name}}</div>
                                 </li>
@@ -22,9 +17,13 @@
                 </ul>
             </div>
             <div class="col-md-10 text-center text-white">
-                @if($volumes->count() > 0)
+            @php ($counter = 0)
+            @foreach($mangas as $manga)
+                @if($manga->volumes->count() > 0)
+                    @if($counter == 0)
                     <div class="row p-3">
-                        @foreach($volumes as $volume)
+                    @endif
+                        @foreach($manga->volumes as $volume)
                                 <div class="inner-wrap-shop my-2 mr-2">
                                     <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
                                     {{isset($volume->image) ? 
@@ -46,30 +45,17 @@
                                     </div>
                                 </div>
                         @endforeach
+                    @if($counter == $mangas->count())
                     </div>
+                    @endif
                 @else 
                     <h1 class="text-white">No Manga Yet</h1>
                 @endif
+                @php ($counter++)
+            @endforeach
                 <div class="d-flex justify-content-center">
-                        {{ $volumes->links() }}
+                        
                     </div>
             </div>
         </div>
     </div>
-   @endif
-@endsection
-
-@section('css')
-
-@endsection
-
-@section('scripts')
-<script>
-        $('#categoriesToggler').on('hidden.bs.collapse', function () {
-            document.getElementById('catCollapse').innerHTML = "Show Categories";
-        });
-        $('#categoriesToggler').on('shown.bs.collapse', function () {
-            document.getElementById('catCollapse').innerHTML = "  Hide Categories  ";
-        });
-    </script>
-@endsection

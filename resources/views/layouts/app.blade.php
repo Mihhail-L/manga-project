@@ -41,7 +41,9 @@
                             </a>
                             <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
                                 @foreach ($categories as $category)
-                                    <a class="dropdown-item reset-text text-white" href="/mangashop/category/{{$category->id}}"> {{$category->name}} </a>
+                                    @if($category->mangas->count())
+                                        <a class="dropdown-item reset-text text-white" href="/mangashop/category/{{$category->id}}"> {{$category->name}} </a>
+                                    @endif
                                 @endforeach
                             </div>
                         </li>
