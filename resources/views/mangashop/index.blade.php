@@ -7,33 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2 border-thing text-left">
-                <h2 class="text-white">Categories</h2>
-                <button class="btn btn-secondary" data-toggle="collapse" type="button" data-target="#categoriesToggler" aria-expanded="false" id="catCollapse">Show Categories </button>
-                <ul class="collapse float-left list-group" id="categoriesToggler">
-                    @foreach ($categories as $category)
-                        @if($category->mangas->count() > 0)
-                            <a href="{{route('mangashop.category', $category->id)}}" class="reset-text text-white">
-                                <li class="categories-btn w-100 list-group-item ">
-                                    <div class="mt-1">{{$category->name}}</div>
-                                </li>
-                            </a>
-                        @endif
-                    @endforeach
-                </ul>
-                <hr>
-                <h2 class="text-white">Manga</h2>
-                <button class="btn btn-secondary" data-toggle="collapse" type="button" data-target="#mangaToggler" aria-expanded="false" id="catCollapse">Show Manga </button>
-                <ul class="collapse float-left list-group" id="mangaToggler">
-                    @foreach ($mangas as $manga)
-                        @if($manga->volumes->count() > 0)
-                            <a href="{{route('mangashop.manga', $manga->id)}}" class="reset-text text-white">
-                                <li class="categories-btn w-100 list-group-item ">
-                                    <div class="mt-1">{{$manga->title}}</div>
-                                </li>
-                            </a>
-                        @endif
-                    @endforeach
-                </ul>
+                @include('inc.sidebar')
             </div>
             <div class="col-md-10 text-center text-white">
                 @if($volumes->count() > 0)
@@ -56,6 +30,7 @@
                                             @else
                                                 ${{$volume->price}} 
                                             @endif
+                                            <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
                                         </span>
                                     </div>
                                 </div>
@@ -97,5 +72,13 @@
         $('#tagToggler').on('shown.bs.collapse', function () {
             document.getElementById('tagCollapse').innerHTML = "  Hide Tags  ";
         });
+        function addtocart(id) {
+            $.ajax({
+               url: '/addtocart/'+id,
+               success: function (response) {
+                    location.reload();
+               }
+            });
+        };
     </script>
 @endsection

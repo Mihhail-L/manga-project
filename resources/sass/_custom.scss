@@ -451,6 +451,7 @@ li.categories-btn {
 
 i.fas.fa-cart-plus.text-primary:hover {
   color: #e9ecef !important;
+  cursor:pointer !important;
 }
 
 .dropdown .dropdown-menu{
@@ -571,4 +572,8 @@ i.fas.fa-cart-plus.text-primary:hover {
   table#cart tfoot td{display:block; }
   table#cart tfoot td .btn{display:block;}
 
+}
+
+#add.cursor-pointer a {
+  cursor:pointer;
 }

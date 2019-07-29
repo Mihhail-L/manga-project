@@ -30,6 +30,7 @@
                                             @else
                                                 ${{$volume->price}} 
                                             @endif
+                                            <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
                                         </span>
                                     </div>
                                 </div>
@@ -66,6 +67,7 @@
                                             @else
                                                 ${{$volume->price}} 
                                             @endif
+                                            <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
                                         </span>
                                     </div>
                                 </div>
