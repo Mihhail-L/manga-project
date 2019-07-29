@@ -12,6 +12,7 @@
 */
 use App\Category;
 use App\Tag;
+use App\Manga;
 
 View::composer('layouts.app', function($view) {
     $view
@@ -19,15 +20,25 @@ View::composer('layouts.app', function($view) {
     ->with('tags', Tag::all());
 });
 
+View::composer('inc.sidebar', function($view) {
+    $view->with('categories', Category::all())
+    ->with('tags', Tag::all())
+    ->with('mangas', Manga::all());
+});
+
 Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
 Route::get('/mangashop', 'MangaShopController@index')->name('mangashop.index');
 
-Route::get('/mangashop/category/{id}', 'MangaShopController@categoryFilter')->name('mangashop.category');
+Route::get('/mangashop/filter/manga/{id}', 'MangaShopController@mangaFilter')->name('mangashop.manga');
+
+Route::get('/mangashop/filter/category/{id}', 'MangaShopController@categoryFilter')->name('mangashop.category');
+
+Route::get('/mangashop/filter/tag/{id}', 'MangaShopController@categoryFilter')->name('mangashop.tag');
 
 Route::get('/mangashop/discounts', 'MangaShopController@discountFilter')->name('mangashop.discounts');
 
-Route::get('/mangashop/manga/{id}', 'MangaShopController@show')->name('mangashop.show');
+Route::get('/mangashop/volume/{id}', 'MangaShopController@show')->name('mangashop.show');
 
 Route::get('/addtocart/{id}', 'MangaShopController@addToCart')->name('mangashop.addtocart');
 

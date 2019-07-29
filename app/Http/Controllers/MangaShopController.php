@@ -14,11 +14,13 @@ class MangaShopController extends Controller
         $volumes = Volume::paginate(12);
         $categories = Category::all();
         $tags = Tag::all();
+        $mangas = Manga::all();
 
         return view('mangashop.index')
                 ->with('volumes', $volumes)
                 ->with('categories', $categories)
-                ->with('tags', $tags);
+                ->with('tags', $tags)
+                ->with('mangas', $mangas);
     }
 
     public function show($id) {
@@ -42,14 +44,31 @@ class MangaShopController extends Controller
 
         return view('mangashop.index')
                 ->with('mangas', $mangas)
-                ->with('categories', $categories)
-                ->with('tags', $tags)
                 ->with('filter', $filter);
         
     }
 
     public function tagFilter($id) {
-        //
+        $tag = Tag::findOrFail($id);
+        $filter = 'tag';
+        $mangas = $tag->mangas()->where('tag_id', $id)->get();
+        
+        return view('mangashop.index')
+                ->with('mangas', $mangas)
+                ->with('filter', $filter);
+    }
+
+    public function mangaFilter($id) {
+        $manga = Manga::findOrFail($id);
+        $categories = Category::all();
+        $filter = 'manga';
+        $tags = Tag::all();
+        //dd($manga);
+        return view('mangashop.index')
+                ->with('manga', $manga)
+                ->with('categories', $categories)
+                ->with('tags', $tags)
+                ->with('filter', $filter);
     }
     /*
         CART LOGIC

@@ -20,6 +20,20 @@
                         @endif
                     @endforeach
                 </ul>
+                <hr>
+                <h2 class="text-white">Manga</h2>
+                <button class="btn btn-secondary" data-toggle="collapse" type="button" data-target="#mangaToggler" aria-expanded="false" id="catCollapse">Show Manga </button>
+                <ul class="collapse float-left list-group" id="mangaToggler">
+                    @foreach ($mangas as $manga)
+                        @if($manga->volumes->count() > 0)
+                            <a href="{{route('mangashop.manga', $manga->id)}}" class="reset-text text-white">
+                                <li class="categories-btn w-100 list-group-item ">
+                                    <div class="mt-1">{{$manga->title}}</div>
+                                </li>
+                            </a>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
             <div class="col-md-10 text-center text-white">
                 @if($volumes->count() > 0)
@@ -70,6 +84,18 @@
         });
         $('#categoriesToggler').on('shown.bs.collapse', function () {
             document.getElementById('catCollapse').innerHTML = "  Hide Categories  ";
+        });
+        $('#mangaToggler').on('hidden.bs.collapse', function () {
+            document.getElementById('mangaCollapse').innerHTML = "Show Manga";
+        });
+        $('#mangaToggler').on('shown.bs.collapse', function () {
+            document.getElementById('mangaCollapse').innerHTML = "  Hide Manga  ";
+        });
+        $('#tagToggler').on('hidden.bs.collapse', function () {
+            document.getElementById('tagCollapse').innerHTML = "Show Tags";
+        });
+        $('#tagToggler').on('shown.bs.collapse', function () {
+            document.getElementById('tagCollapse').innerHTML = "  Hide Tags  ";
         });
     </script>
 @endsection
