@@ -68,7 +68,7 @@ class MangaShopController extends Controller
                         "quantity" => 1,
                         "price" => $product->price,
                         "discount" => $product->discount,
-                        "photo" => isset($product->image) ? asset("/storage{$product->image}") : asset("/storage{$product->manga->image}"),
+                        "photo" => isset($product->image) ? asset("/storage/{$product->image}") : asset("/storage/{$product->manga->image}"),
                     ]
             ];
  
