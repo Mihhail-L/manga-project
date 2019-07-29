@@ -15,6 +15,7 @@
 <div class="container text-white">
     <div class="carousel-stuff row">
             <div class="large-12 columns">
+                @include('inc.messages')
                 <h3 class="section-title">Featured Manga</h3>
                     <div class="carousel" data-flickity='{
                         "cellAlign": "left",
@@ -35,7 +36,7 @@
                                         {{isset($volume->image) ? 
                                         asset("storage/$volume->image") : 
                                         asset("storage/$manga->image")}}" 
-                                        class="carousel-cell-image"> </a>  
+                                        class="carousel-cell-image"> </a>
                                         <div class="text-center">    
                                             <h5 class=" pt-2"> Manga </h5>
                                             <div class="tx-div"></div>
@@ -47,6 +48,7 @@
                                                 @else
                                                     ${{$volume->price}} 
                                                 @endif
+                                                <a id="add" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
                                             </span>
                                         </div>
                                     </div>                   
@@ -110,6 +112,31 @@
 <!-- This is for later scripts and custom css imports -->
 @section('scripts')
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<script>
+    function addtocart(id) {
+            $.ajax({
+               url: '/addtocart/'+id,
+               success: function (response) {
+                    location.reload();
+               }
+            });
+        };
+    // $(".update-cart").click(function (e) {
+    //        e.preventDefault();
+ 
+    //        var ele = $(this);
+ 
+    //         $.ajax({
+    //            url: '{{ url('update-cart') }}',
+    //            method: "patch",
+    //            data: {_token: '{{ csrf_token() }}', id: ele.attr("data-id"), quantity: ele.parents("tr").find(".quantity").val()},
+    //            success: function (response) {
+    //                window.location.reload();
+    //            }
+    //         });
+    //     });
+</script>
 @endsection
 
 @section('css')

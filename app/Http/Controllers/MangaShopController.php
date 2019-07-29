@@ -47,4 +47,92 @@ class MangaShopController extends Controller
                 ->with('filter', $filter);
         
     }
+
+    public function tagFilter($id) {
+        //
+    }
+    /*
+        CART LOGIC
+    */
+    public function addToCart($id) {
+        $product = Volume::findOrFail($id);
+ 
+        $cart = session()->get('cart');
+ 
+        // check if cart is empty
+        if(!$cart) {
+ 
+            $cart = [
+                    $id => [
+                        "name" => $product->manga->title. ' ' .$product->volume,
+                        "quantity" => 1,
+                        "price" => $product->price,
+                        "discount" => $product->discount,
+                        "photo" => isset($product->image) ? asset("/storage{$product->image}") : asset("/storage{$product->manga->image}"),
+                    ]
+            ];
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+ 
+        // if this product already exists inside the cart, update quantity
+        if(isset($cart[$id])) {
+ 
+            $cart[$id]['quantity']++;
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+ 
+        }
+ 
+        // if new product is added to cart, push it to the session
+        $cart[$id] = [
+            "name" => $product->manga->title. ' ' .$product->volume,
+            "quantity" => 1,
+            "price" => $product->price,
+            "discount" => $product->discount,
+            "photo" => isset($product->image) ? asset("/storage/{$product->image}") : asset("/storage/{$product->manga->image}"),
+        ];
+ 
+        session()->put('cart', $cart);
+ 
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }   
+    public function updateCart(Request $request)
+    {
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+ 
+            $cart[$request->id]["quantity"] = $request->quantity;
+ 
+            session()->put('cart', $cart);
+ 
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+ 
+    public function removeCart(Request $request)
+    {
+        if($request->id) {
+ 
+            $cart = session()->get('cart');
+ 
+            if(isset($cart[$request->id])) {
+ 
+                unset($cart[$request->id]);
+ 
+                session()->put('cart', $cart);
+            }
+ 
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+
+    public function viewCart() {
+        return view('mangashop.cart');
+    }
 }

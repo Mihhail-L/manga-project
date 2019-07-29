@@ -16,12 +16,4 @@ class WelcomeController extends Controller
 
         return view('welcome')->with('mangas', $mangas)->with('tags', $tags)->with('categories', $categories);
     }
-
-    public function tagFilter() {
-        //
-    }
-
-    public function categoryFilter() {
-        //
-    }
 }

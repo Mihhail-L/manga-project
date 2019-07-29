@@ -29,6 +29,14 @@ Route::get('/mangashop/discounts', 'MangaShopController@discountFilter')->name('
 
 Route::get('/mangashop/manga/{id}', 'MangaShopController@show')->name('mangashop.show');
 
+Route::get('/addtocart/{id}', 'MangaShopController@addToCart')->name('mangashop.addtocart');
+
+Route::delete('/removefromcart/{id}', 'MangaShopController@removeCart')->name('mangashop.removefromcart');
+
+Route::put('/updatecart/{id}', 'MangaShopController@updateCart')->name('mangashop.updatecart');
+
+Route::get('/cart', 'MangaShopController@viewCart')->name('mangashop.view.cart');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
