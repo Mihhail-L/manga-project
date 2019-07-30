@@ -14,11 +14,18 @@
                     <div class="row p-3">
                         @foreach($volumes as $volume)
                                 <div class="inner-wrap-shop my-2 mr-2">
-                                    <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
-                                    {{isset($volume->image) ? 
-                                    asset("storage/$volume->image") : 
-                                    asset("storage/$volume->manga()->image")}}" 
-                                    class="carousel-cell-image"> </a>  
+                                    <div class="hoveroverimagedark">
+                                        <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
+                                        {{isset($volume->image) ? 
+                                        asset("storage/$volume->image") : 
+                                        asset("storage/$volume->manga()->image")}}" 
+                                        class="carousel-cell-image"> </a>  
+                                        <div class="add-to-cart1">
+                                            <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )">
+                                                <i class="fas fa-cart-plus text-white fa-2x"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                     <div class="text-center">    
                                         <h5 class=" pt-2"> Manga </h5>
                                         <div class="tx-div"></div>
@@ -29,8 +36,7 @@
                                                 <ins> <span>${{round((1 - $volume->discount/100) * $volume->price, 2)}}</span> </ins>
                                             @else
                                                 ${{$volume->price}} 
-                                            @endif
-                                            <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
+                                            @endif                                
                                         </span>
                                     </div>
                                 </div>

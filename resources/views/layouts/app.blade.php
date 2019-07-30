@@ -73,11 +73,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- CART -->
 
-                        <div class="dropdown pr-3">
+                        <div class="dropdown dropdown1 pr-3">
                             <button type="button" class="btn btn-secondary-cart nav-link" data-toggle="dropdown">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-secondary">{{ !empty(session('cart')) ? count(session('cart')) : 0 }}</span>
                             </button>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu menu1">
                                 <div class="row total-header-section">
                                     <div class="col-lg-6 col-sm-6 col-6">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-secondary">{{ !empty(session('cart')) ? count(session('cart')) : 0 }}</span>

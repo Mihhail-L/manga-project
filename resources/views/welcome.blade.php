@@ -32,11 +32,18 @@
                             @foreach($manga->volumes as $volume)
                                 <div class="carousel-cell">
                                     <div class="inner-wrap">
-                                        <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
-                                        {{isset($volume->image) ? 
-                                        asset("storage/$volume->image") : 
-                                        asset("storage/$manga->image")}}" 
-                                        class="carousel-cell-image"> </a>
+                                        <div class="hoveroverimagedark">
+                                                <a href=" {{route('mangashop.show', $volume->id)}} " class="text-reset"><img src="
+                                                    {{isset($volume->image) ? 
+                                                    asset("storage/$volume->image") : 
+                                                    asset("storage/$manga->image")}}" 
+                                                    class="carousel-cell-image"> </a>
+                                                    <div class="add-to-cart">
+                                                        <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )">
+                                                            <i class="fas fa-cart-plus text-white fa-2x"></i>
+                                                        </a>
+                                                    </div>
+                                        </div>
                                         <div class="text-center">    
                                             <h5 class=" pt-2"> Manga </h5>
                                             <div class="tx-div"></div>
@@ -48,7 +55,6 @@
                                                 @else
                                                     ${{$volume->price}} 
                                                 @endif
-                                                <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume->id}} )"><i class="fas fa-cart-plus text-primary"></i></a>
                                             </span>
                                         </div>
                                     </div>                   
@@ -111,7 +117,6 @@
 
 <!-- This is for later scripts and custom css imports -->
 @section('scripts')
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 <script>
     function addtocart(id) {
@@ -140,5 +145,5 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
 @endsection

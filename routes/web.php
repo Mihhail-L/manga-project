@@ -17,7 +17,8 @@ use App\Manga;
 View::composer('layouts.app', function($view) {
     $view
     ->with('categories', Category::all())
-    ->with('tags', Tag::all());
+    ->with('tags', Tag::all())
+    ->with('mangas', Manga::all());
 });
 
 View::composer('inc.sidebar', function($view) {
@@ -37,6 +38,14 @@ Route::get('/mangashop/filter/category/{id}', 'MangaShopController@categoryFilte
 Route::get('/mangashop/filter/tag/{id}', 'MangaShopController@categoryFilter')->name('mangashop.tag');
 
 Route::get('/mangashop/discounts', 'MangaShopController@discountFilter')->name('mangashop.discounts');
+
+
+//actually decided that i dont want to add bundles, database is set for it though.
+/*
+Route::get('/mangashop/bundles', 'MangaShopController@mangaBundles')->name('mangashop.bundles');
+
+Route::get('/mangashop/bundle/{id}', 'MangaShopController@mangaBundle')->name('mangashop.bundle');
+*/
 
 Route::get('/mangashop/volume/{id}', 'MangaShopController@show')->name('mangashop.show');
 

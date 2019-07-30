@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./flickity.pkgd.min.js');
 
 window.Vue = require('vue');
 
