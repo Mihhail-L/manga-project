@@ -15,12 +15,12 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('manga_id');
+            $table->unsignedBigInteger('volume_id');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('manga_id')->references('id')->on('mangas')->onDelete('cascade');
+            $table->foreign('volume_id')->references('id')->on('volumes')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('title');
             $table->text('review');
+            $table->integer('rating')->nullable();
             $table->timestamps();
         });
     }

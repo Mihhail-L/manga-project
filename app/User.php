@@ -42,7 +42,8 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function isAdmin() {
+    public function isAdmin() 
+    {
         return $this->role == 'admin';
     }
 }

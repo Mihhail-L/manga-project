@@ -7,6 +7,7 @@ use App\Volume;
 use App\Category;
 use App\Tag;
 use App\Manga;
+use App\Review;
 
 class MangaShopController extends Controller
 {
@@ -26,12 +27,11 @@ class MangaShopController extends Controller
     public function show($id) {
         $volume = Volume::findOrFail($id);
         $manga = $volume->manga();
-        $reviews = $volume->manga->reviews();
-        // $manga_id = $volume->manga->id;
-        // $mangass = Manga::find($manga_id);
-        // $reviews = $mangass->reviews();
+        $reviews = $volume->reviews()->where('volume_id', $id)->paginate(6);
 
-        return view('mangashop.show')->with('volume', $volume)->with('manga', $manga)->with('reviews', $reviews);
+        
+
+        return view('mangashop.show')->with('volume', $volume)->with('manga', $manga)->with('reviews', $reviews)->with('volumeid', $id);
     }
 
     public function categoryFilter($id) {

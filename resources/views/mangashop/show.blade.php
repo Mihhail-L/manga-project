@@ -9,9 +9,11 @@
             <div class="col-md-8">
                 <h2> {{$volume->manga->title}} {{$volume->volume}} </h2>
                 @if($volume->stock == 0)
-                    <button class="btn float-right btn-secondary disabled">Place holder</button>
+                    <h4 class="text-danger float-right">Out Of Stock</h4>
                 @else
-                    <button class="btn btn-success float-right">Place holder</button>
+                <a id="add" role="button" class="cursor-pointer float-right mb-3" onclick="addtocart( {{$volume->id}} )">
+                        <i class="fas fa-cart-plus text-white fa-2x"></i>
+                    </a>
                 @endif
                 <h5> Manga Author: {{$volume->manga->author}} </h5>
                 <h5>Price: <span class="price" style="font-size:20px;"> 
@@ -59,11 +61,18 @@
                                         @if($volume1->stock > 0)
                                             <div class="carousel-cell">
                                                 <div class="inner-wrap">
-                                                    <a href=" {{route('mangashop.show', $volume1->id)}} " class="text-reset"><img src="
-                                                    {{isset($volume1->image) ? 
-                                                    asset("storage/$volume1->image") : 
-                                                    asset("storage/$volume1->manga->image")}}" 
-                                                    class="carousel-cell-image"> </a>  
+                                                                <div class="hoveroverimagedark">
+                                                                    <a href=" {{route('mangashop.show', $volume1->id)}} " class="text-reset"><img src="
+                                                                    {{isset($volume1->image) ? 
+                                                                    asset("storage/$volume1->image") : 
+                                                                    asset("storage/$volume1->manga()->image")}}" 
+                                                                    class="carousel-cell-image"> </a>  
+                                                                    <div class="add-to-cart">
+                                                                        <a id="add" role="button" class="cursor-pointer" onclick="addtocart( {{$volume1->id}} )">
+                                                                            <i class="fas fa-cart-plus text-white fa-2x"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
                                                     <div class="text-center">    
                                                         <h5 class=" pt-2"> Manga </h5>
                                                         <div class="tx-div"></div>
@@ -88,43 +97,85 @@
     <!-- Place holder for reviews later -->
     <div class="container text-white pt-5">
             <h3 class="section-title title_center">
-                    <span class="p-5">{{$volume->manga->title}} Reviews</span>
+                    <span class="p-5">{{$volume->manga->title}} {{$volume->volume}} Reviews</span>
                 </h3>
+                @php($counter=0)
                 <div class="row">
-                    <div class="col">
-                        <blockquote  class="blockquote">
-                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-                            <footer class="blockquote-footer">From WWF's website</footer>
-                        </blockquote>
-                    </div>
-                    <div class="col">
-                        <blockquote class="blockquote">
-                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-                            <footer class="blockquote-footer">From WWF's website</footer>
-                        </blockquote>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <blockquote  class="blockquote">
-                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-                            <footer class="blockquote-footer">From WWF's website</footer>
-                        </blockquote>
-                    </div>
-                    <div class="col">
-                        <blockquote class="blockquote">
-                            <p class="mb-0">For 50 years, WWF has been protecting the future of nature. The world's leading conservation organization, WWF works in 100 countries and is supported by 1.2 million members in the United States and close to 5 million globally.</p>
-                            <footer class="blockquote-footer">From WWF's website</footer>
-                        </blockquote>
-                    </div>
+                    @if(isset($reviews))
+                        @foreach($reviews as $review)
+                            <div class="col">
+                                <blockquote  class="blockquote">
+                                    <div class="mb-0"> {!!$review->review!!} </div>
+                                    <footer class="blockquote-footer"> {!!$review->getUser()->name!!}
+                                        @auth
+                                            @if(auth()->user()->id === $review->getUser()->id)
+                                                <button class="btn btn-secondary btn-sm float-right">Edit</button>
+                                            @endif
+                                        @endauth
+                                    </footer>
+                                </blockquote>
+                            </div>
+                            @php($counter++)
+                            @if($counter == 2)
+                            </div>
+                            <div class="row">
+                                @php($counter = 0)
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
     </div>
+    <hr>
+    @auth
+    <div class="container pt-3">
+                <div class="card-body form-dark">
+                        <form action=" {{route('review.store', $volumeid)}} " method="POST">
+                            @csrf
+                            <input type="hidden" name="userid" value=" {{auth()->user()->id}} ">
+                            <div class="form-group row">
+                                <label for="review" class="col-md-2 col-form-label text-md-right">{{ __('Review') }}</label>
+                                <div class="col-md-8 dark-trix">
+                                    <input id="review" 
+                                        type="hidden" 
+                                        name="review" 
+                                        class="form-control @error('review') is-invalid @enderror" 
+                                        value="{{ old('review')}}">
+                                    <trix-editor input="review"></trix-editor>
+                
+                                    @error('review')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-7 offset-md-5">
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+    </div>
+    @endauth
 @endsection
 
 @section('scripts')
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.1/trix.js"></script>
+    <script>
+        function addtocart(id) {
+                $.ajax({
+                url: '/addtocart/'+id,
+                success: function (response) {
+                        location.reload();
+                }
+                });
+            };
+    </script>
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.1/trix.css">
 @endsection

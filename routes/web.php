@@ -61,6 +61,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware(['auth'])->group(function() {
+
+    Route::post('/mangashop/volume/{id}/review/submit', 'ReviewController@store')->name('review.store');
+
+});
+
 //Only admins should be able to Create/Read/Update/Delete individual volumes/manga/tags/categories/users etc..
 Route::middleware(['auth', 'admin'])->group(function() {
 
@@ -71,5 +77,9 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::resource('/category', 'CategoryController');
     
     Route::resource('/tags', 'TagController');
+
+    Route::get('/reviews', 'ReviewController@index')->name('review.list');
+
+    Route::resource('/users', 'UsersController');
 
 });

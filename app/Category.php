@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function mangas() {
+    public function mangas() 
+    {
         return $this->belongsToMany(Manga::class);
     }
 }
